@@ -1,0 +1,53 @@
+---
+title: Working with Hakyll
+---
+
+![](/images/haskell-logo.png)
+
+WordPress was nice for some time. There were
+lots of nice themes to choose from, installation was easy, things mostly
+worked. However, the need to keep updating it with security patches, and the
+need to keep sifting through comment spam, became tiresome.
+
+I always wish I had time to work on something in Haskell, so I decided to put
+the need for a new blog platform together with that: I've switched to 
+[Hakyll](http://jaspervdj.be/hakyll/), at least for now. This means I generate
+the site statically, as HTML pages. This means my site requires very little
+compute power to run, and it's even easier for me to administer than the WP
+site was. It also means I don't have support for comments, which is sad but
+saves me lots of time sifting through spam. My contact information is on the 
+[contact page](/contact.html), please reach out directly if you have comments. 
+Maybe I'll add some third-party discussion site pointers at a future date. Let
+me know if you have opinions about that.
+
+Creating the site was fairly simple and took about a day, and took the
+following steps:
+
+* Download and install [stack](https://github.com/commercialhaskell/stack) 
+(not cabal). This is the build tool we'll use to fetch and install hakyll and
+its dependencies. Stack is now the preferred build tool for Haskell. They have
+binaries available for lots of platforms.
+* Follow the [hakyll installation tutorial](http://jaspervdj.be/hakyll/tutorials/01-installation.html),
+substituting "stack" for "cabal".
+
+Now you have a (very) bare bones site. I then:
+
+* Added [Bootstrap](http://getbootstrap.com/examples/blog/). I basically copied
+in the HTML from the template and modified it as needed to make it work with 
+Hakyll.
+* Added RSS and Atom feeds using the [snapshots tutorial](http://jaspervdj.be/hakyll/tutorials/05-snapshots-feeds.html)
+* Changed the landing page to show teasers rather than full articles or just
+links. The [teaser tutorial](http://jaspervdj.be/hakyll/tutorials/using-teasers-in-hakyll.html)
+was very helpful for that. Definitely read this *after* getting the RSS feeds
+working, it will make more sense.
+* Other minor things like adding favicons
+
+All in all, quite a bit simpler than I expected. The fact that it was so easy
+to use stack instead of cabal was a nice surprise along the way. The tutorials
+for Hakyll are really helpful, though there are some details missing, so be
+patient.
+
+It turns out not to need as much actual Haskell programming time as I 
+expected, but maybe when I need to make something fancier I'll get to work on
+an actual Haskell project. 
+
