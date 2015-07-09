@@ -1,0 +1,19 @@
+$for(teasers)$
+<div class="blog-post">
+  <h2 class="blog-post-title">
+            <a href="$url$">$title$</a>
+  </h2>
+  <p class="blog-post-metadata">
+    $if(author)$
+      by $author$ on $date$
+    $else$
+      $date$
+    $endif$
+  </p>
+    $if(teaser)$
+      $teaser$
+    $else$
+      $body$
+    $endif$
+</div>
+$endfor$

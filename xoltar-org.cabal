@@ -1,0 +1,28 @@
+name:               xoltar-org
+synopsis:           xoltar.org website
+version:            0.1.0.0
+build-type:         Simple
+cabal-version:      >= 1.10
+
+
+description:         Please see README.md
+homepage:            http://www.xoltar.org
+--license:             All rights reserved
+author:              Bryn Keller
+maintainer:          xoltar@xoltar.org
+copyright:           2015 Bryn Keller. All rights reserved.
+category:            Web
+build-type:          Simple
+-- extra-source-files:  
+cabal-version:       >=1.10
+
+executable site
+  main-is:          site.hs
+  build-depends:    base >= 4.7 && < 5
+                  , hakyll == 4.6.*
+  ghc-options:      -threaded
+  default-language: Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/xoltar/xoltar.org
