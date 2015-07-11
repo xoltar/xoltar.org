@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Control.Monad (liftM)
 import           Data.Monoid (mappend)
+import           System.FilePath
 import           Hakyll
 
 
@@ -21,13 +22,13 @@ main = hakyll $ do
         compile compressCssCompiler
 
     match (fromList ["about.rst", "contact.markdown"]) $ do
-        route   $ setExtension "html"
+        route   $ cleanURL
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
     match "posts/*" $ do
-        route $ setExtension "html"
+        route $ cleanURL 
         compile $ pandocCompiler
             -- save immediately after pandoc, but before the templates are applied
             >>= saveSnapshot "content"
@@ -36,7 +37,7 @@ main = hakyll $ do
             >>= relativizeUrls
 
     create ["archive.html"] $ do
-        route idRoute
+        route $ cleanURL
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let archiveCtx =
@@ -90,6 +91,19 @@ postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     teaserField "teaser" "content" `mappend`
     defaultContext
+
+cleanURL :: Routes
+cleanURL = customRoute fileToDirectory
+
+fileToDirectory :: Identifier -> FilePath
+fileToDirectory = (flip combine) "index.html" . dropExtension . toFilePath
+
+toIndex :: Routes
+toIndex = customRoute fileToIndex
+
+fileToIndex :: Identifier -> FilePath
+fileToIndex = (flip combine) "index.html" . dropFileName . toFilePath
+
 
 feedConfiguration :: FeedConfiguration
 feedConfiguration = FeedConfiguration
