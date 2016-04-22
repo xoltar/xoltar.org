@@ -4,9 +4,20 @@ import           Control.Monad (liftM)
 import           Data.Monoid (mappend)
 import           System.FilePath
 import           Hakyll
-
+import qualified Data.Set as S
+import           Text.Pandoc.Options
 
 --------------------------------------------------------------------------------
+customPandocCompiler :: Compiler (Item String)
+customPandocCompiler =
+    let customExtensions = [Ext_definition_lists, Ext_link_attributes]
+        defaultExtensions = writerExtensions defaultHakyllWriterOptions
+        newExtensions = foldr S.insert defaultExtensions customExtensions
+        writerOptions = defaultHakyllWriterOptions {
+                          writerExtensions = newExtensions
+                        }
+    in pandocCompilerWith defaultHakyllReaderOptions writerOptions
+
 main :: IO ()
 main = hakyll $ do
     match "favicon.*" $ do
@@ -29,7 +40,7 @@ main = hakyll $ do
 
     match "posts/*" $ do
         route $ cleanURL 
-        compile $ pandocCompiler
+        compile $ customPandocCompiler
             -- save immediately after pandoc, but before the templates are applied
             >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
