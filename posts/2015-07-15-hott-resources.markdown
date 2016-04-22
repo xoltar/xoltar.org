@@ -11,6 +11,8 @@ The main resource is of course, the
 resources seem useful enough that I want a consolidated list of them for
 myself.  So I thought maybe you might, too.
 
+<!--more-->
+
 Group threads that provided these links:
 
 * [Long way to the HoTT book](https://groups.google.com/forum/#!topic/hott-cafe/VHzQWyYbXt0)
