@@ -137,5 +137,5 @@ Next time
 ---------
 
 These were some important things to be aware of when starting to develop in C++
-on Macs. In the next installment, we'll talk about dynamic libraries, install
+on Macs. In the [next installment](/posts/2016-05-03-mac-os-x-native-2), we'll talk about dynamic libraries, install
 names, and other such loveliness.
